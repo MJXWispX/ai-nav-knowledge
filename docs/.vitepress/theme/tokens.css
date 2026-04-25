@@ -1,0 +1,66 @@
+:root {
+  /* ===== 项目级语义变量（优先改这里）===== */
+  /* 主强调色：会影响按钮、可点击主色等核心视觉 */
+  --site-accent: #63e2b7;
+  /* 主强调色-悬停态 */
+  --site-accent-soft: #65e6bb;
+  /* 主强调色-按下/深色态 */
+  --site-accent-strong: #65eabe;
+  /* 主文本色（正文） */
+  --site-text: var(--vp-c-text-1);
+  /* 次文本色（说明文字） */
+  --site-text-muted: var(--vp-c-text-2);
+  /* 全局分割线颜色 */
+  --site-border: var(--vp-c-divider);
+  /* 页脚链接颜色（例如 GitHub） */
+  --site-footer-link: #63e2b7;
+
+  /* ===== VitePress 品牌色映射（一般不用单独改）===== */
+  /* 将 VitePress 品牌色统一映射到上面的语义变量 */
+  --vp-c-brand-1: var(--site-accent);
+  --vp-c-brand-2: var(--site-accent-soft);
+  --vp-c-brand-3: var(--site-accent-strong);
+  /* 品牌色浅背景（用于部分 hover/soft 场景） */
+  --vp-c-brand-soft: color-mix(in srgb, var(--site-accent) 14%, transparent);
+
+  /* ===== VitePress 品牌按钮颜色映射 ===== */
+  /* brand 按钮背景：默认/悬停/按下 */
+  --vp-button-brand-bg: var(--vp-c-brand-1);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-bg: var(--vp-c-brand-3);
+  /* brand 按钮边框：当前设为透明，保持简洁风格 */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-active-border: transparent;
+  /* brand 按钮文字颜色 */
+  --vp-button-brand-text: #ffffff;
+}
+
+.dark {
+  /* ===== 暗色模式变量（建议与浅色分开维护）===== */
+  /* 暗色下主强调色建议稍亮，保证对比度 */
+  --site-accent: #5672cd;
+  --site-accent-soft: #6f89de;
+  --site-accent-strong: #4f6ac5;
+  /* 文本、分割线继续复用 VitePress 暗色默认语义色 */
+  --site-text: var(--vp-c-text-1);
+  --site-text-muted: var(--vp-c-text-2);
+  --site-border: var(--vp-c-divider);
+  /* 页脚链接在暗色下可单独调亮 */
+  --site-footer-link: #63e2b7;
+
+  /* 暗色模式品牌色映射 */
+  --vp-c-brand-1: var(--site-accent);
+  --vp-c-brand-2: var(--site-accent-soft);
+  --vp-c-brand-3: var(--site-accent-strong);
+  --vp-c-brand-soft: color-mix(in srgb, var(--site-accent) 18%, transparent);
+
+  /* 暗色模式品牌按钮映射 */
+  --vp-button-brand-bg: var(--vp-c-brand-1);
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-bg: var(--vp-c-brand-3);
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-text: #ffffff;
+}

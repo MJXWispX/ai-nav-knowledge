@@ -17,6 +17,11 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+.cursor
+docs/.vitepress/dist
+docs/.vitepress/cache/
+docs/docs/.vitepress/dist/
+docs/docs/
 *.suo
 *.ntvs*
 *.njsproj

@@ -1,63 +1,106 @@
 import { defineConfig } from 'vitepress'
+import { navbar } from './scripts/navbar'
+import { createKnowledgeSidebar } from './scripts/sidebar'
+
+// 站点元信息
+const SITE_URL = 'https://ai-nav-knowledge.pages.dev'
+const SITE_TITLE = 'WispX 的 AI 知识库'
+const SITE_DESC = 'WispX 的 AI 知识库'
+
+// 导航数据
+const sidebar = createKnowledgeSidebar()
 
 export default defineConfig({
-  // 站点基础信息
-  title: '我的个人知识库',
-  description: '记录技术学习、项目经验与知识沉淀',
+  // 基础配置
+  title: SITE_TITLE,
+  description: SITE_DESC,
   lang: 'zh-CN',
+  cleanUrls: true,
+  lastUpdated: true,
+  ignoreDeadLinks: true,
+  
+  // 构建与源码
+  outDir: './docs/.vitepress/dist',
+  srcExclude: ['CLAUDE.md', 'README.md', 'node_modules/**'],
 
-  // 部署路径（如果用 GitHub Pages，设为仓库名；Vercel/Cloudflare Pages 可设为 '/'）
-  base: '/my-knowledge-base/',
+  // 头部与 SEO
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1.0' }]
+  ],
+
+  // Markdown 配置
+  markdown: {
+    lineNumbers: true,
+    image: { lazyLoading: true },
+    config(md) {
+      const defaultImageRender =
+        md.renderer.rules.image ??
+        ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options))
+
+      md.renderer.rules.image = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        const src = token.attrGet('src') ?? ''
+        const isExternalImage = /^https?:\/\//i.test(src)
+
+        // External image hosts may reject hotlink requests with Referer.
+        // Add no-referrer policy globally to improve compatibility.
+        if (isExternalImage) {
+          token.attrSet('referrerpolicy', 'no-referrer')
+          token.attrSet('crossorigin', 'anonymous')
+        }
+
+        return defaultImageRender(tokens, idx, options, env, self)
+      }
+    }
+  },
 
   // 主题配置
   themeConfig: {
-    // 站点 logo（可选，放在 docs/public 目录下）
-    logo: '/logo.png',
+    logo: '/logo.svg',
+    siteTitle: SITE_TITLE,
+    nav: navbar,
+    sidebar,
+    
+    // 右侧大纲
+    outline: { level: [2, 6], label: '大纲' },
+    lastUpdated: { text: '更新时间' },
 
-    // 顶部导航栏
-    nav: [
-      { text: '首页', link: '/' },
-      { text: '技术笔记', link: '/tech/' },
-      { text: '项目实战', link: '/project/' },
-      { text: '关于我', link: '/about' }
+    // GitHub 链接
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/MJXWispX/ai-nav-knowledge' }
     ],
-
-    // 侧边栏（知识库核心，按目录层级配置）
-    sidebar: {
-      '/tech/': [
-        {
-          text: '前端开发',
-          items: [
-            { text: 'Vue 3 核心概念', link: '/tech/vue3-core' },
-            { text: 'TypeScript 入门', link: '/tech/typescript-basics' }
-          ]
-        },
-        {
-          text: '后端开发',
-          items: [
-            { text: 'Node.js 异步编程', link: '/tech/nodejs-async' }
-          ]
-        }
-      ],
-      '/project/': [
-        {
-          text: '个人项目',
-          items: [
-            { text: 'VitePress 知识库搭建', link: '/project/vitepress-knowledge-base' }
-          ]
-        }
-      ]
+    editLink: {
+      pattern: 'https://github.com/MJXWispX/ai-nav-knowledge/edit/main/docs/:path',
+      text: '在 GitHub 上编辑此页'
     },
 
-    // 社交链接（可选）
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/你的用户名' }
-    ],
+    // 搜索功能
+    search: {
+      provider: 'local',
+      options: {
+        translations: {
+          button: {
+            buttonText: '搜索',
+            buttonAriaLabel: '搜索'
+          },
+          modal: {
+            displayDetails: '显示详情',
+            resetButtonTitle: '清空搜索',
+            noResultsText: '无搜索结果',
+            footer: {
+              selectText: '选择',
+              navigateText: '切换',
+              closeText: '关闭'
+            }
+          }
+        }
+      }
+    },
 
-    // 底部版权信息
-    footer: {
-      message: '基于 VitePress 构建',
-      copyright: 'Copyright © 2026 你的名字'
-    }
+    // 分页文字
+    docFooter: { prev: '上一页', next: '下一页' },
+    darkModeSwitchLabel: '主题切换',
+    returnToTopLabel: '回到顶部'
   }
 })

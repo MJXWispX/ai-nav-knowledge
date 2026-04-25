@@ -1,0 +1,51 @@
+.global-site-footer {
+  border-top: 1px solid var(--site-border);
+  margin-top: 24px;
+  padding: 20px 16px 28px;
+  text-align: center;
+}
+
+.global-site-footer a {
+  color: var(--site-footer-link);
+  font-size: 18px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.global-site-footer a:hover {
+  text-decoration: underline;
+}
+
+.global-site-footer p {
+  color: var(--site-text-muted);
+  font-size: 15px;
+  margin: 6px 0 0;
+}
+
+.VPHome .name {
+  letter-spacing: -0.02em;
+}
+
+.VPHome .text {
+  font-weight: 700;
+}
+
+.VPHome .tagline {
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.VPNavBarTitle .title {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.VPNavBarTitle .title::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  background: url("/logo.svg") center / contain no-repeat;
+}
