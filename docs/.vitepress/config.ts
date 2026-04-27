@@ -6,6 +6,7 @@ import { createKnowledgeSidebar } from './scripts/sidebar'
 const SITE_URL = 'https://ai-nav-knowledge.pages.dev'
 const SITE_TITLE = 'WispX 的 AI 知识库'
 const SITE_DESC = 'WispX 的 AI 知识库'
+const CONFIGURED_OUT_DIR = './.vitepress/dist'
 
 // 导航数据
 const sidebar = createKnowledgeSidebar()
@@ -20,13 +21,19 @@ export default defineConfig({
   ignoreDeadLinks: true,
   
   // 构建与源码
-  outDir: './docs/.vitepress/dist',
+  outDir: CONFIGURED_OUT_DIR,
   srcExclude: ['CLAUDE.md', 'README.md', 'node_modules/**'],
 
   // 头部与 SEO
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
-    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1.0' }]
+    ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1.0' }],
+    ['style', {}, `
+      a.title::before {
+        content: none !important;
+        display: none !important;
+      }
+    `]
   ],
 
   // Markdown 配置

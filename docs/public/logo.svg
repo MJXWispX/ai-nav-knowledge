@@ -1,0 +1,91 @@
+ <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="g5v" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"  stop-color="#63e2b7" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#63e2b7" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="glow5">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <clipPath id="clip5">
+          <rect x="20" y="20" width="160" height="160"/>
+        </clipPath>
+      </defs>
+
+      <!-- BG grid scan lines -->
+      <g clip-path="url(#clip5)" opacity="0.08">
+        <line x1="0" y1="30"  x2="200" y2="30"  stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="45"  x2="200" y2="45"  stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="60"  x2="200" y2="60"  stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="75"  x2="200" y2="75"  stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="90"  x2="200" y2="90"  stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="105" x2="200" y2="105" stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="120" x2="200" y2="120" stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="135" x2="200" y2="135" stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="150" x2="200" y2="150" stroke="#63e2b7" stroke-width="0.5"/>
+        <line x1="0" y1="165" x2="200" y2="165" stroke="#63e2b7" stroke-width="0.5"/>
+      </g>
+
+      <!-- Outer square frame with corner cuts -->
+      <path d="M30,20 L170,20 L180,30 L180,170 L170,180 L30,180 L20,170 L20,30 Z"
+            fill="none" stroke="#63e2b7" stroke-width="1.5" opacity="0.6"/>
+      <path d="M32,22 L168,22 L178,32 L178,168 L168,178 L32,178 L22,168 L22,32 Z"
+            fill="none" stroke="#63e2b7" stroke-width="0.5" opacity="0.3"/>
+
+      <!-- Corner decorations -->
+      <rect x="20" y="20" width="12" height="2" fill="#63e2b7"/>
+      <rect x="20" y="20" width="2" height="12" fill="#63e2b7"/>
+      <rect x="168" y="20" width="12" height="2" fill="#63e2b7"/>
+      <rect x="178" y="20" width="2" height="12" fill="#63e2b7"/>
+      <rect x="20" y="178" width="12" height="2" fill="#63e2b7"/>
+      <rect x="20" y="168" width="2" height="12" fill="#63e2b7"/>
+      <rect x="168" y="178" width="12" height="2" fill="#63e2b7"/>
+      <rect x="178" y="168" width="2" height="12" fill="#63e2b7"/>
+
+      <!-- Open book (main shape) -->
+      <g filter="url(#glow5)" opacity="0.95">
+        <!-- Left page -->
+        <path d="M55,75 Q55,68 62,68 L98,68 L98,135 Q82,132 62,138 Q55,140 55,132 Z"
+              fill="rgba(99,226,183,0.06)" stroke="#63e2b7" stroke-width="1.8"/>
+        <!-- Right page -->
+        <path d="M145,75 Q145,68 138,68 L102,68 L102,135 Q118,132 138,138 Q145,140 145,132 Z"
+              fill="rgba(99,226,183,0.06)" stroke="#63e2b7" stroke-width="1.8"/>
+        <!-- Spine -->
+        <line x1="100" y1="68" x2="100" y2="135" stroke="#63e2b7" stroke-width="1.5"/>
+
+        <!-- Left page lines -->
+        <line x1="64"  y1="80" x2="94"  y2="80" stroke="#63e2b7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="64"  y1="88" x2="94"  y2="88" stroke="#63e2b7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="64"  y1="96" x2="94"  y2="96" stroke="#63e2b7" stroke-width="0.8" opacity="0.5"/>
+        <line x1="64"  y1="104" x2="86" y2="104" stroke="#63e2b7" stroke-width="0.8" opacity="0.5"/>
+
+        <!-- Right page: AI circuit -->
+        <circle cx="122" cy="82" r="3" fill="none" stroke="#63e2b7" stroke-width="1" opacity="0.8"/>
+        <circle cx="135" cy="82" r="2" fill="#63e2b7" opacity="0.8"/>
+        <line x1="125" y1="82" x2="133" y2="82" stroke="#63e2b7" stroke-width="0.9" opacity="0.8"/>
+        <line x1="122" y1="85" x2="122" y2="94" stroke="#63e2b7" stroke-width="0.9" opacity="0.7"/>
+        <circle cx="122" cy="97" r="3" fill="none" stroke="#63e2b7" stroke-width="1" opacity="0.7"/>
+        <line x1="125" y1="97" x2="135" y2="97" stroke="#63e2b7" stroke-width="0.9" opacity="0.7"/>
+        <circle cx="122" cy="109" r="2" fill="#63e2b7" opacity="0.6"/>
+        <line x1="122" y1="100" x2="122" y2="107" stroke="#63e2b7" stroke-width="0.9" opacity="0.6"/>
+        <line x1="109" y1="82" x2="119" y2="82" stroke="#63e2b7" stroke-width="0.9" opacity="0.5"/>
+        <circle cx="108" cy="82" r="2" fill="none" stroke="#63e2b7" stroke-width="1" opacity="0.5"/>
+      </g>
+
+      <!-- Top label -->
+      <text x="100" y="52" fill="#63e2b7" font-size="9" font-weight="bold"
+            text-anchor="middle" font-family="'Cinzel Decorative', serif" letter-spacing="3">
+        VOILE.AI
+      </text>
+
+      <!-- Bottom labels -->
+      <text x="100" y="155" fill="#63e2b7" font-size="6.5"
+            text-anchor="middle" font-family="monospace" letter-spacing="4" opacity="0.7">
+        MAGIC LIBRARY
+      </text>
+      <text x="100" y="165" fill="#63e2b7" font-size="5.5"
+            text-anchor="middle" font-family="monospace" letter-spacing="3" opacity="0.4">
+        SYS 0.1 / ONLINE
+      </text>
+    </svg>

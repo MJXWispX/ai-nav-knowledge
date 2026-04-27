@@ -1,7 +1,12 @@
 {
-  "name": "vitepress-project",
+  "name": "na-nav-knowledge",
+  "version": "1.0.0",
+  "description": "WispX 的 AI 知识库 — 基于 VitePress (Vue 3 + Vite) 的纯静态文档站点",
   "private": true,
   "type": "module",
+   "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vitepress dev docs",
     "build": "vitepress build docs",
@@ -14,7 +19,13 @@
     "vitepress": "^1.6.4",
     "vue": "^3.5.22"
   },
-  "pnpm": {
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MJXWispX/ai-nav-knowledge.git"
+  },
+  "author": "WispX",
+  "license": "MIT",
+  "pnpm": { 
     "peerDependencyRules": {
       "ignoreMissing": [
         "@algolia/client-search"
