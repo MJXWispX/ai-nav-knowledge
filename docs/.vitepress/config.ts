@@ -70,7 +70,7 @@ export default defineConfig({
     sidebar,
     
     // 右侧大纲
-    outline: { level: [2, 6], label: '大纲' },
+    outline: { level: [1, 6], label: '大纲' },
     lastUpdated: { text: '更新时间' },
 
     // GitHub 链接
