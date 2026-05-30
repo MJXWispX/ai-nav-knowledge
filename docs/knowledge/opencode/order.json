@@ -1,0 +1,11 @@
+[
+  "OpenCode",
+  "AgentLoop",
+  "Processor",
+  "Session",
+  "SystemPrompt",
+  "ContextCompression",
+  "Tool",
+  "Skill",
+  "SubAgent"
+]

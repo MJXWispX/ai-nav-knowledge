@@ -52,35 +52,8 @@ function collectMarkdownFiles(
   return files
 }
 
-function formatFallbackText(filePath: string): string {
-  const baseName = path.basename(filePath, path.extname(filePath))
-  return baseName
-    .split(/[-_]/g)
-    .filter(Boolean)
-    .map((word) => word[0]?.toUpperCase() + word.slice(1))
-    .join(' ')
-}
-
 function readTitle(filePath: string): string {
-  const fallbackTitle = formatFallbackText(filePath)
-  try {
-    const content = fs.readFileSync(filePath, 'utf-8')
-    const lines = content.split('\n')
-    // Display name priority:
-    // 1) first H1 within top lines
-    // 2) fallback to file name
-    const h1Line = lines
-      .slice(0, 30)
-      .find((line) => line.trim().startsWith('# '))
-
-    if (!h1Line) return fallbackTitle
-    const headingTitle = h1Line.replace(/^#\s+/, '').trim()
-    // For overly generic short headings (e.g. "基础"), keep filename for better distinction.
-    if (headingTitle.length <= 2 && fallbackTitle.length > headingTitle.length) return fallbackTitle
-    return headingTitle
-  } catch {
-    return fallbackTitle
-  }
+  return path.basename(filePath, path.extname(filePath))
 }
 
 function toKnowledgeLink(filePath: string, knowledgeRootDir: string): string {
@@ -97,7 +70,40 @@ function sortByLink(items: Array<{ text: string; link: string }>): void {
   items.sort((a, b) => a.link.localeCompare(b.link, 'zh-CN'))
 }
 
-function buildGroupMap(items: SidebarLeafItem[]): Map<string, Array<{ text: string; link: string }>> {
+function readDirOrder(dirPath: string): Map<string, number> {
+  const orderFile = path.join(dirPath, 'order.json')
+  if (!fs.existsSync(orderFile)) return new Map()
+  try {
+    const data = JSON.parse(fs.readFileSync(orderFile, 'utf-8'))
+    if (!Array.isArray(data)) return new Map()
+    const orderMap = new Map<string, number>()
+    data.forEach((name: string, index: number) => orderMap.set(name, index))
+    return orderMap
+  } catch {
+    return new Map()
+  }
+}
+
+function sortWithOrder(
+  items: Array<{ text: string; link: string }>,
+  orderMap: Map<string, number>
+): void {
+  items.sort((a, b) => {
+    const aName = path.basename(a.link)
+    const bName = path.basename(b.link)
+    const aOrder = orderMap.get(aName)
+    const bOrder = orderMap.get(bName)
+    if (aOrder !== undefined && bOrder !== undefined) return aOrder - bOrder
+    if (aOrder !== undefined) return -1
+    if (bOrder !== undefined) return 1
+    return a.link.localeCompare(b.link, 'zh-CN')
+  })
+}
+
+function buildGroupMap(
+  items: SidebarLeafItem[],
+  knowledgeRootDir: string
+): Map<string, Array<{ text: string; link: string }>> {
   const groupMap = new Map<string, Array<{ text: string; link: string }>>()
 
   for (const item of items) {
@@ -106,8 +112,16 @@ function buildGroupMap(items: SidebarLeafItem[]): Map<string, Array<{ text: stri
     groupMap.get(groupName)?.push({ text: item.text, link: item.link })
   }
 
-  for (const [, groupItems] of groupMap) {
-    sortByLink(groupItems)
+  for (const [groupName, groupItems] of groupMap) {
+    const dirPath = groupName === ROOT_GROUP
+      ? knowledgeRootDir
+      : path.join(knowledgeRootDir, groupName)
+    const orderMap = readDirOrder(dirPath)
+    if (orderMap.size > 0) {
+      sortWithOrder(groupItems, orderMap)
+    } else {
+      sortByLink(groupItems)
+    }
   }
 
   return groupMap
@@ -148,7 +162,7 @@ export function createKnowledgeSidebar(): DefaultTheme.Sidebar {
     .filter((item) => item.relativePath && !item.relativePath.startsWith('..'))
     .filter((item, index, all) => index === all.findIndex((candidate) => candidate.link === item.link))
 
-  const groupMap = buildGroupMap(items)
+  const groupMap = buildGroupMap(items, knowledgeRootDir)
   // Keep current UX:
   // - root files are flat list
   // - first-level directories are collapsible groups
