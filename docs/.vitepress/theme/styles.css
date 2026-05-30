@@ -1,51 +1,589 @@
-.global-site-footer {
-  border-top: 1px solid var(--site-border);
-  margin-top: 24px;
-  padding: 20px 16px 28px;
-  text-align: center;
+/* =========================================================
+   Archive Noir — Styles
+   A refined, warm knowledge sanctuary.
+   ========================================================= */
+
+/* ----- 1. Global ----- */
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
-.global-site-footer a {
-  color: var(--site-footer-link);
-  font-size: 18px;
-  font-weight: 400;
-  text-decoration: none;
+::selection {
+  background: color-mix(in srgb, var(--site-accent) 18%, transparent);
+  color: inherit;
 }
 
-.global-site-footer a:hover {
-  text-decoration: underline;
+/* Scrollbar — thin, warm, unobtrusive */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--site-accent) 22%, transparent);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--site-accent) 40%, transparent);
 }
 
-.global-site-footer p {
-  color: var(--site-text-muted);
-  font-size: 15px;
-  margin: 6px 0 0;
-}
-
-.VPHome .name {
-  letter-spacing: -0.02em;
-}
-
-.VPHome .text {
-  font-weight: 700;
-}
-
-.VPHome .tagline {
-  max-width: 640px;
-  margin: 0 auto;
-  line-height: 1.7;
+/* ----- 2. Navbar — soft, warm, like frosted glass over parchment ----- */
+.VPNavBar {
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  background: color-mix(in srgb, var(--site-bg) 84%, transparent) !important;
+  border-bottom: 1px solid var(--site-border-light);
 }
 
 .VPNavBarTitle .title {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  font-size: 16px;
 }
 
-.VPNavBarTitle .title::before {
+/* ----- 3. Sidebar — subtle separation ----- */
+.VPSidebar {
+  border-right: 1px solid var(--site-border-light);
+}
+
+.VPSidebarItem .link:hover,
+.VPSidebarItem .link.active {
+  color: var(--site-accent);
+}
+
+.VPSidebarItem .link.active {
+  background: var(--site-accent-muted);
+  border-left: 2px solid var(--site-accent);
+}
+
+/* ----- 4. Hero — bookplate edition ----- */
+.VPHome {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 32px;
+}
+
+/* Warm ambient glow behind the hero */
+.VPHome::before {
   content: "";
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  background: url("/logo.svg") center / contain no-repeat;
+  position: absolute;
+  top: -25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle at 50% 40%,
+    color-mix(in srgb, var(--site-accent) 6%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.VPHome .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Bookplate frame — double border around hero content */
+.VPHome .main {
+  position: relative;
+  border: 1px solid var(--site-border);
+  border-radius: var(--site-radius-lg);
+  padding: 44px 40px 36px;
+  background: color-mix(in srgb, var(--site-bg) 70%, transparent);
+  box-shadow: var(--site-shadow-lg);
+}
+
+/* Inner decorative rule — second border */
+.VPHome .main::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid var(--site-border-light);
+  border-radius: calc(var(--site-radius-lg) - 3px);
+  pointer-events: none;
+}
+
+/* Decorative vermillion rule above hero name */
+.VPHome .name {
+  position: relative;
+  padding-top: 8px;
+  font-family: "DM Serif Display", "Songti SC", "STSong", "Noto Serif SC", serif;
+  font-size: 52px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--site-text);
+}
+
+.VPHome .name::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin: 0 auto 20px;
+  background: var(--site-accent);
+  border-radius: 1px;
+  opacity: 0.7;
+}
+
+.VPHome .text {
+  font-weight: 600;
+  color: var(--site-text-muted);
+  font-family: "DM Serif Display", "Songti SC", "STSong", serif;
+  font-size: 28px;
+  margin-top: 4px;
+}
+
+.VPHome .tagline {
+  max-width: 560px;
+  margin: 16px auto 0;
+  line-height: 1.75;
+  font-size: 17px;
+  color: var(--site-text-muted);
+  font-weight: 400;
+}
+
+/* Hero actions spacing */
+.VPHome .actions {
+  margin-top: 28px;
+}
+
+/* Hero image — elevated, refined */
+.VPHome .image-container {
+  filter: drop-shadow(0 8px 28px color-mix(in srgb, var(--site-accent) 14%, transparent));
+  transition: filter var(--site-transition-slow);
+}
+.VPHome .image-container:hover {
+  filter: drop-shadow(0 14px 36px color-mix(in srgb, var(--site-accent) 22%, transparent));
+}
+
+.VPHome .image-bg {
+  background: color-mix(in srgb, var(--site-accent) 5%, transparent);
+  border-radius: 50%;
+}
+
+/* ----- 5. Buttons — refined, warm ----- */
+.VPButton {
+  border-radius: var(--site-radius-sm) !important;
+  font-weight: 550 !important;
+  letter-spacing: 0.01em !important;
+  transition: all var(--site-transition) !important;
+}
+
+.VPButton.brand {
+  background: var(--site-accent) !important;
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--site-accent) 28%, transparent);
+}
+.VPButton.brand:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--site-accent) 36%, transparent);
+  transform: translateY(-1px);
+}
+
+.VPButton.alt {
+  border: 1px solid var(--site-border) !important;
+  background: var(--site-bg-soft) !important;
+  color: var(--site-text) !important;
+}
+.VPButton.alt:hover {
+  border-color: var(--site-accent) !important;
+  color: var(--site-accent-strong) !important;
+  background: var(--site-accent-muted) !important;
+  transform: translateY(-1px);
+}
+
+/* ----- 6. Feature cards — card catalog style ----- */
+.VPFeatures {
+  padding-top: 40px;
+}
+
+.VPFeature {
+  background: var(--site-bg-soft);
+  border: 1px solid var(--site-border);
+  border-radius: var(--site-radius);
+  padding: 30px 26px !important;
+  box-shadow: var(--site-shadow);
+  transition: all var(--site-transition);
+  position: relative;
+}
+
+/* Decorative top edge — like a well-made card */
+.VPFeature::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: var(--site-border);
+  transition: all var(--site-transition);
+}
+
+.VPFeature:hover {
+  box-shadow: var(--site-shadow-md);
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--site-accent) 30%, transparent);
+}
+
+.VPFeature:hover::before {
+  background: var(--site-accent);
+  left: 16px;
+  right: 16px;
+  opacity: 0.5;
+}
+
+/* Feature icon — vermillion seal / amber lamp */
+.VPFeature .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--site-radius-sm);
+  background: var(--site-accent-muted);
+  font-size: 20px;
+  margin-bottom: 18px;
+  transition: background var(--site-transition);
+}
+.VPFeature:hover .icon {
+  background: color-mix(in srgb, var(--site-accent) 14%, transparent);
+}
+
+.VPFeature .title {
+  font-weight: 650;
+  font-size: 17px;
+  letter-spacing: -0.005em;
+  color: var(--site-text);
+}
+
+.VPFeature .details {
+  color: var(--site-text-muted);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* ----- 7. Content typography ----- */
+.vp-doc {
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* H1 — stately serif heading */
+.vp-doc h1 {
+  font-family: "DM Serif Display", "Songti SC", "STSong", "Noto Serif SC", serif;
+  font-weight: 500;
+  font-size: 2.2em;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  color: var(--site-text);
+  margin-bottom: 0.5em;
+}
+
+/* Decorative rule under H1 */
+.vp-doc h1::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin-top: 0.35em;
+  background: var(--site-accent);
+  border-radius: 1px;
+  opacity: 0.6;
+}
+
+.vp-doc h2 {
+  font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+  font-weight: 600;
+  font-size: 1.45em;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--site-border-light);
+  padding-bottom: 0.3em;
+  margin-top: 2em;
+}
+
+.vp-doc h3 {
+  font-weight: 600;
+  font-size: 1.15em;
+  letter-spacing: -0.005em;
+}
+
+.vp-doc h4 {
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+/* Links — scholarly underline */
+.vp-doc a:not(.header-anchor):not(.vp-link) {
+  color: var(--site-accent-strong);
+  text-decoration: none;
+  background: linear-gradient(to right, var(--site-accent), var(--site-accent));
+  background-size: 0% 1px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--site-transition-fast);
+  font-weight: 500;
+}
+.vp-doc a:not(.header-anchor):not(.vp-link):hover {
+  background-size: 100% 1px;
+}
+
+/* Inline code — warm tint */
+.vp-doc :not(pre) > code {
+  background: color-mix(in srgb, var(--site-accent) 8%, transparent);
+  color: var(--site-accent-strong);
+  border-radius: var(--site-radius-xs);
+  padding: 2px 6px;
+  font-size: 0.875em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ----- 8. Code blocks — vintage technical manual ----- */
+.vp-doc div[class*="language-"] {
+  border-radius: var(--site-radius) !important;
+  border: 1px solid var(--site-border);
+  box-shadow: var(--site-shadow-sm);
+  overflow: hidden;
+  margin: 1.5em 0;
+}
+
+.vp-doc div[class*="language-"] pre {
+  border-radius: 0 !important;
+}
+
+/* Language tag — subtle refinement */
+.vp-doc div[class*="language-"]::before {
+  color: var(--site-text-faint) !important;
+  font-size: 11px !important;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ----- 9. Tables — clean, refined ----- */
+.vp-doc table {
+  border-radius: var(--site-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--site-border-light);
+  font-size: 0.92em;
+}
+.vp-doc th {
+  background: var(--site-bg-soft);
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.vp-doc tr:nth-child(even) td {
+  background: color-mix(in srgb, var(--site-bg-soft) 50%, transparent);
+}
+
+/* ----- 10. Blockquotes — marginalia ----- */
+.vp-doc blockquote {
+  border-left: 3px solid var(--site-accent);
+  background: var(--site-accent-muted);
+  border-radius: 0 var(--site-radius-sm) var(--site-radius-sm) 0;
+  padding: 14px 22px;
+  font-style: italic;
+  color: var(--site-text-muted);
+}
+
+/* ----- 11. Outline (right TOC) ----- */
+.VPOutlineItem .outline-link {
+  transition: all var(--site-transition-fast);
+  border-radius: var(--site-radius-xs);
+}
+.VPOutlineItem .outline-link:hover {
+  color: var(--site-accent) !important;
+  background: var(--site-accent-muted);
+}
+
+/* ----- 12. Edit link ----- */
+.edit-link-button {
+  color: var(--site-accent-strong) !important;
+  font-size: 13px;
+}
+
+/* ----- 13. Prev/Next pagers ----- */
+.pager-link {
+  border: 1px solid var(--site-border-light) !important;
+  border-radius: var(--site-radius) !important;
+  padding: 18px 22px !important;
+  transition: all var(--site-transition) !important;
+  background: var(--site-bg-soft);
+}
+.pager-link:hover {
+  border-color: var(--site-accent) !important;
+  box-shadow: var(--site-shadow-md);
+}
+
+/* ----- 14. Back to top ----- */
+.VPBackToTop {
+  border-radius: 50% !important;
+  background: var(--site-bg-soft) !important;
+  border: 1px solid var(--site-border-light) !important;
+  box-shadow: var(--site-shadow) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: all var(--site-transition) !important;
+}
+.VPBackToTop:hover {
+  border-color: var(--site-accent) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--site-shadow-md) !important;
+}
+
+/* ----- 15. Search ----- */
+.VPSearchBox .DocSearch-Button {
+  border-radius: var(--site-radius-sm) !important;
+  border: 1px solid var(--site-border-light) !important;
+  background: var(--site-bg-soft) !important;
+  transition: all var(--site-transition-fast) !important;
+}
+.VPSearchBox .DocSearch-Button:hover {
+  border-color: var(--site-accent) !important;
+  box-shadow: var(--site-shadow-sm);
+}
+
+/* ----- 16. Footer — colophon ----- */
+.global-site-footer {
+  border-top: 1px solid var(--site-border);
+  margin-top: 40px;
+  padding: 32px 16px 40px;
+  text-align: center;
+  background: var(--site-bg-soft);
+  position: relative;
+}
+
+/* Decorative ornament above footer text */
+.global-site-footer::before {
+  content: "◆";
+  display: block;
+  font-size: 8px;
+  color: var(--site-accent);
+  opacity: 0.5;
+  letter-spacing: 12px;
+  margin-bottom: 20px;
+}
+
+.global-site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--site-footer-link);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 18px;
+  border-radius: var(--site-radius-sm);
+  border: 1px solid var(--site-border-light);
+  background: var(--site-bg);
+  transition: all var(--site-transition-fast);
+}
+
+.global-site-footer a:hover {
+  border-color: var(--site-accent);
+  background: var(--site-accent-muted);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.global-site-footer p {
+  color: var(--site-text-faint);
+  font-size: 12px;
+  margin: 12px 0 0;
+  letter-spacing: 0.02em;
+}
+
+/* ----- 17. Fade-in page load ----- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.VPHome .main {
+  animation: fadeUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.VPHome .image-container {
+  animation: fadeUp 0.7s 0.1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.VPFeature {
+  animation: fadeUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.VPFeature:nth-child(1) { animation-delay: 0.15s; }
+.VPFeature:nth-child(2) { animation-delay: 0.25s; }
+.VPFeature:nth-child(3) { animation-delay: 0.35s; }
+
+/* ----- 18. Dark mode refinements ----- */
+.dark .VPNavBar {
+  background: color-mix(in srgb, var(--site-bg) 88%, transparent) !important;
+}
+
+.dark .VPHome .main {
+  background: color-mix(in srgb, var(--site-bg) 60%, transparent);
+  box-shadow: var(--site-shadow-lg);
+}
+
+.dark .VPFeature {
+  background: var(--site-bg-soft);
+}
+
+.dark .vp-doc div[class*="language-"] {
+  background: var(--site-bg-soft);
+}
+
+.dark .VPBackToTop {
+  background: var(--site-bg-soft) !important;
+}
+
+.dark .VPSearchBox .DocSearch-Button {
+  background: var(--site-bg-soft) !important;
+}
+
+/* ----- 19. Responsive ----- */
+@media (max-width: 960px) {
+  .VPHome .main {
+    padding: 32px 24px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .VPHome .name {
+    font-size: 34px;
+  }
+  .VPHome .name::before {
+    width: 36px;
+    height: 2px;
+    margin-bottom: 14px;
+  }
+  .VPHome .text {
+    font-size: 22px;
+  }
+  .VPHome .tagline {
+    font-size: 15px;
+    padding: 0 8px;
+  }
+  .VPHome .main {
+    padding: 24px 18px 22px;
+    border-radius: var(--site-radius-md);
+  }
+  .VPHome::before {
+    width: 500px;
+    height: 500px;
+    top: -20%;
+  }
+
+  .vp-doc h1 {
+    font-size: 1.7em;
+  }
+  .vp-doc h1::after {
+    width: 30px;
+  }
+
+  .VPFeature {
+    padding: 22px 18px !important;
+  }
 }

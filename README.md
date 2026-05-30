@@ -41,6 +41,9 @@ pnpm docs:build
 
 # 本地预览构建产物
 pnpm docs:serve
+
+# 生成/更新目录的文件排序配置
+pnpm order -- <目录名>
 ```
 
 ---
@@ -66,21 +69,37 @@ pnpm docs:serve
 ai-nav-knowledge/
 ├── docs/
 │   ├── .vitepress/
-│   │   ├── config.ts    # 站点核心配置
-│   │   ├── theme/       # 自定义主题样式与组件
-│   │   └── public/       # 静态资源（logo、图标等）
-│   ├── index.md         # 站点首页
-│   └── ...              # 其他文档页面
-├── package.json         # 项目依赖与脚本配置
-└── README.md            # 项目说明文档
+│   │   ├── config.ts       # 站点核心配置
+│   │   ├── scripts/        # 侧边栏等自动化脚本
+│   │   └── theme/          # 自定义主题样式与组件
+│   ├── knowledge/          # AI 知识库文档
+│   │   ├── index.md        # 知识库首页
+│   │   ├── HelloAgent/     # HelloAgent 源码分析
+│   │   └── opencode/       # OpenCode 源码分析
+│   ├── index.md            # 站点首页
+│   └── public/             # 静态资源（logo、图标等）
+├── scripts/                # npm 辅助脚本
+│   └── order.mjs           # 文件排序配置生成脚本
+├── package.json            # 项目依赖与脚本配置
+└── README.md               # 项目说明文档
 ```
 
 ---
 
 ## 📝 文档编写规范
 - 文档使用 Markdown 格式编写，支持 VitePress 扩展语法
-- 新文档请按主题分类放入 `docs` 目录下，保持目录结构清晰
+- 新文档请按主题分类放入 `docs/knowledge` 目录下，保持目录结构清晰
 - 如需自定义样式或组件，可在 `docs/.vitepress/theme/` 中扩展
+
+### 文件排序
+每个子目录允许通过 `order.json` 自定义文件在左侧侧边栏的显示顺序：
+
+```bash
+# 自动生成 order.json（保留已有排序，新文件追加末尾）
+pnpm order -- opencode
+```
+
+`order.json` 中列出文件名（不含 `.md` 扩展名），越靠前显示越靠上。未列出的文件会按字母顺序追加到末尾。没有 `order.json` 的目录则保持默认字母排序。
 
 ---
 

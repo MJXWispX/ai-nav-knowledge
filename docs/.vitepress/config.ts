@@ -26,14 +26,15 @@ export default defineConfig({
 
   // 头部与 SEO
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+    ['link', { rel: 'icon', type: 'image/x-icon', href: '/logo.ico' }],
     ['meta', { name: 'viewport', content: 'width=device-width,initial-scale=1.0' }],
-    ['style', {}, `
-      a.title::before {
-        content: none !important;
-        display: none !important;
-      }
-    `]
+    ['meta', { name: 'theme-color', content: '#FEFCF6' }],
+    ['meta', { name: 'theme-color', content: '#111016', media: '(prefers-color-scheme: dark)' }],
+
+    // DM Serif Display — refined editorial serif for hero & headings
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap' }],
   ],
 
   // Markdown 配置
@@ -64,7 +65,7 @@ export default defineConfig({
 
   // 主题配置
   themeConfig: {
-    logo: '/logo.svg',
+    logo: '/logo.ico',
     siteTitle: SITE_TITLE,
     nav: navbar,
     sidebar,

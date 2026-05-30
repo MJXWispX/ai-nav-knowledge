@@ -1,66 +1,212 @@
-:root {
-  /* ===== 项目级语义变量（优先改这里）===== */
-  /* 主强调色：会影响按钮、可点击主色等核心视觉 */
-  --site-accent: #63e2b7;
-  /* 主强调色-悬停态 */
-  --site-accent-soft: #65e6bb;
-  /* 主强调色-按下/深色态 */
-  --site-accent-strong: #65eabe;
-  /* 主文本色（正文） */
-  --site-text: var(--vp-c-text-1);
-  /* 次文本色（说明文字） */
-  --site-text-muted: var(--vp-c-text-2);
-  /* 全局分割线颜色 */
-  --site-border: var(--vp-c-divider);
-  /* 页脚链接颜色（例如 GitHub） */
-  --site-footer-link: #63e2b7;
+/* =========================================================
+   Archive Noir — Design Tokens
+   Light: Warm Parchment & Vermillion (like a rare bookplate)
+   Dark:  Deep Indigo & Amber (like a lit manuscript in an archive)
+   ========================================================= */
 
-  /* ===== VitePress 品牌色映射（一般不用单独改）===== */
-  /* 将 VitePress 品牌色统一映射到上面的语义变量 */
+:root {
+  /* ===== Accent — Vermillion (朱色) ===== */
+  --site-accent: #C84B31;
+  --site-accent-soft: #E0654A;
+  --site-accent-strong: #A13A24;
+  --site-accent-muted: color-mix(in srgb, #C84B31 9%, transparent);
+
+  /* ===== Gradients ===== */
+  --site-gradient: linear-gradient(135deg, #C84B31 0%, #D4694A 100%);
+  --site-gradient-soft: linear-gradient(135deg, #E0654A 0%, #D4886A 100%);
+  --site-accent-gradient: linear-gradient(135deg, #C84B31 0%, #A13A24 50%, #8B6914 100%);
+
+  /* ===== Text — warm ink on parchment ===== */
+  --site-text: #1E1B18;
+  --site-text-muted: #6B5D4F;
+  --site-text-faint: #9B8D80;
+
+  /* ===== Surfaces — aged paper hierarchy ===== */
+  --site-bg: #FEFCF6;
+  --site-bg-soft: #F7F3EB;
+  --site-bg-muted: #EDE7D7;
+
+  /* ===== Borders — subtle beige ===== */
+  --site-border: #E0D9C5;
+  --site-border-light: #EBE4D2;
+
+  /* ===== Shadows — warm, organic ===== */
+  --site-shadow-sm: 0 1px 2px rgba(30, 27, 24, 0.04);
+  --site-shadow: 0 1px 3px rgba(30, 27, 24, 0.05), 0 1px 2px rgba(30, 27, 24, 0.04);
+  --site-shadow-md: 0 4px 16px rgba(30, 27, 24, 0.06), 0 2px 4px rgba(30, 27, 24, 0.03);
+  --site-shadow-lg: 0 12px 32px rgba(30, 27, 24, 0.08), 0 4px 8px rgba(30, 27, 24, 0.04);
+  --site-shadow-glow: 0 0 28px color-mix(in srgb, #C84B31 18%, transparent);
+
+  /* ===== Radii — slightly organic ===== */
+  --site-radius-xs: 3px;
+  --site-radius-sm: 6px;
+  --site-radius: 10px;
+  --site-radius-md: 14px;
+  --site-radius-lg: 20px;
+
+  /* ===== Transitions — slow & deliberate ===== */
+  --site-transition-fast: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --site-transition: 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  --site-transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ===== Footer ===== */
+  --site-footer-link: #C84B31;
+
+  /* =====================================================
+     VitePress variable overrides — comprehensive remapping
+     ===================================================== */
+
+  /* Brand */
   --vp-c-brand-1: var(--site-accent);
   --vp-c-brand-2: var(--site-accent-soft);
   --vp-c-brand-3: var(--site-accent-strong);
-  /* 品牌色浅背景（用于部分 hover/soft 场景） */
-  --vp-c-brand-soft: color-mix(in srgb, var(--site-accent) 14%, transparent);
+  --vp-c-brand-soft: var(--site-accent-muted);
 
-  /* ===== VitePress 品牌按钮颜色映射 ===== */
-  /* brand 按钮背景：默认/悬停/按下 */
-  --vp-button-brand-bg: var(--vp-c-brand-1);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
-  --vp-button-brand-active-bg: var(--vp-c-brand-3);
-  /* brand 按钮边框：当前设为透明，保持简洁风格 */
+  /* Background hierarchy */
+  --vp-c-bg: var(--site-bg);
+  --vp-c-bg-soft: var(--site-bg-soft);
+  --vp-c-bg-mute: var(--site-bg-muted);
+  --vp-c-bg-alt: var(--site-bg-soft);
+
+  /* Text hierarchy */
+  --vp-c-text-1: var(--site-text);
+  --vp-c-text-2: var(--site-text-muted);
+  --vp-c-text-3: var(--site-text-faint);
+
+  /* Dividers */
+  --vp-c-divider: var(--site-border);
+
+  /* Pure colors */
+  --vp-c-white: #FEFCF6;
+  --vp-c-black: #1E1B18;
+
+  /* Gray scale → mapped to our warm palette */
+  --vp-c-gray-1: #6B5D4F;
+  --vp-c-gray-2: #9B8D80;
+  --vp-c-gray-3: #C4B9A8;
+
+  /* Override VitePress default indigo/green/red with our palette */
+  --vp-c-indigo-1: var(--site-accent);
+  --vp-c-indigo-2: var(--site-accent-soft);
+  --vp-c-indigo-3: var(--site-accent-strong);
+  --vp-c-green-1: #5B8C5A;
+  --vp-c-green-2: #6DA16C;
+  --vp-c-green-3: #4A7A49;
+  --vp-c-red-1: #C84B31;
+  --vp-c-red-2: #E0654A;
+  --vp-c-red-3: #A13A24;
+  --vp-c-yellow-1: #C8963E;
+  --vp-c-yellow-2: #D4A843;
+  --vp-c-yellow-3: #B8860B;
+
+  /* ===== Brand buttons ===== */
+  --vp-button-brand-bg: var(--site-accent);
+  --vp-button-brand-hover-bg: var(--site-accent-soft);
+  --vp-button-brand-active-bg: var(--site-accent-strong);
   --vp-button-brand-border: transparent;
   --vp-button-brand-hover-border: transparent;
   --vp-button-brand-active-border: transparent;
-  /* brand 按钮文字颜色 */
-  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-text: #FEFCF6;
+
+  /* Alt button */
+  --vp-button-alt-bg: var(--site-bg-soft);
+  --vp-button-alt-hover-bg: var(--site-bg-muted);
+  --vp-button-alt-text: var(--site-text);
+  --vp-button-alt-hover-text: var(--site-accent-strong);
+  --vp-button-alt-border: var(--site-border);
+  --vp-button-alt-hover-border: var(--site-accent);
 }
 
+/* =========================================================
+   Dark Mode — Archive Noir
+   ========================================================= */
 .dark {
-  /* ===== 暗色模式变量（建议与浅色分开维护）===== */
-  /* 暗色下主强调色建议稍亮，保证对比度 */
-  --site-accent: #5672cd;
-  --site-accent-soft: #6f89de;
-  --site-accent-strong: #4f6ac5;
-  /* 文本、分割线继续复用 VitePress 暗色默认语义色 */
-  --site-text: var(--vp-c-text-1);
-  --site-text-muted: var(--vp-c-text-2);
-  --site-border: var(--vp-c-divider);
-  /* 页脚链接在暗色下可单独调亮 */
-  --site-footer-link: #63e2b7;
+  /* ===== Accent — Amber lamp light ===== */
+  --site-accent: #E8A840;
+  --site-accent-soft: #F0C060;
+  --site-accent-strong: #C88830;
+  --site-accent-muted: color-mix(in srgb, #E8A840 10%, transparent);
 
-  /* 暗色模式品牌色映射 */
+  /* ===== Gradients ===== */
+  --site-gradient: linear-gradient(135deg, #D49838 0%, #E8A840 100%);
+  --site-gradient-soft: linear-gradient(135deg, #F0C060 0%, #E8B850 100%);
+  --site-accent-gradient: linear-gradient(135deg, #E8A840 0%, #D49838 50%, #C08430 100%);
+
+  /* ===== Text — warm cream on deep indigo ===== */
+  --site-text: #E8E3D3;
+  --site-text-muted: #A0988A;
+  --site-text-faint: #70685E;
+
+  /* ===== Surfaces — deep archive ===== */
+  --site-bg: #111016;
+  --site-bg-soft: #1C1A23;
+  --site-bg-muted: #26242E;
+
+  /* ===== Borders — dark with subtle warmth ===== */
+  --site-border: #333040;
+  --site-border-light: #2A2735;
+
+  /* ===== Shadows — deep, dark ===== */
+  --site-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --site-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --site-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.25);
+  --site-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.3);
+  --site-shadow-glow: 0 0 32px color-mix(in srgb, #E8A840 16%, transparent);
+
+  /* ===== Footer ===== */
+  --site-footer-link: #E8A840;
+
+  /* ===== VitePress overrides ===== */
   --vp-c-brand-1: var(--site-accent);
   --vp-c-brand-2: var(--site-accent-soft);
   --vp-c-brand-3: var(--site-accent-strong);
-  --vp-c-brand-soft: color-mix(in srgb, var(--site-accent) 18%, transparent);
+  --vp-c-brand-soft: var(--site-accent-muted);
 
-  /* 暗色模式品牌按钮映射 */
-  --vp-button-brand-bg: var(--vp-c-brand-1);
-  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
-  --vp-button-brand-active-bg: var(--vp-c-brand-3);
+  --vp-c-bg: var(--site-bg);
+  --vp-c-bg-soft: var(--site-bg-soft);
+  --vp-c-bg-mute: var(--site-bg-muted);
+  --vp-c-bg-alt: var(--site-bg-soft);
+
+  --vp-c-text-1: var(--site-text);
+  --vp-c-text-2: var(--site-text-muted);
+  --vp-c-text-3: var(--site-text-faint);
+
+  --vp-c-divider: var(--site-border);
+
+  --vp-c-white: #E8E3D3;
+  --vp-c-black: #111016;
+
+  --vp-c-gray-1: #A0988A;
+  --vp-c-gray-2: #70685E;
+  --vp-c-gray-3: #4A4440;
+
+  --vp-c-indigo-1: var(--site-accent);
+  --vp-c-indigo-2: var(--site-accent-soft);
+  --vp-c-indigo-3: var(--site-accent-strong);
+  --vp-c-green-1: #5B8C5A;
+  --vp-c-green-2: #6DA16C;
+  --vp-c-green-3: #4A7A49;
+  --vp-c-red-1: #E0654A;
+  --vp-c-red-2: #F0806A;
+  --vp-c-red-3: #C84B31;
+  --vp-c-yellow-1: #E8A840;
+  --vp-c-yellow-2: #F0C060;
+  --vp-c-yellow-3: #C88830;
+
+  /* ===== Brand buttons ===== */
+  --vp-button-brand-bg: var(--site-accent);
+  --vp-button-brand-hover-bg: var(--site-accent-soft);
+  --vp-button-brand-active-bg: var(--site-accent-strong);
   --vp-button-brand-border: transparent;
   --vp-button-brand-hover-border: transparent;
   --vp-button-brand-active-border: transparent;
-  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-text: #111016;
+
+  /* Alt button */
+  --vp-button-alt-bg: var(--site-bg-soft);
+  --vp-button-alt-hover-bg: var(--site-bg-muted);
+  --vp-button-alt-text: var(--site-text);
+  --vp-button-alt-hover-text: var(--site-accent);
+  --vp-button-alt-border: var(--site-border);
+  --vp-button-alt-hover-border: var(--site-accent);
 }
